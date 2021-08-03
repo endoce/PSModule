@@ -19,14 +19,9 @@ Function Get-SecurityAgents{
 
     # Parameters
     param (
-        [Parameter(Mandatory)][String[]]$ComputerName,[string]$Remediation=$False
+        [Parameter(Mandatory)][String[]]$ComputerName,[string]$Remediation="1"
     )
     $Services = @(
-        "CiscoAMP_7.1.5",
-        "CiscoAMP_7.2.3",
-        "CiscoAMP_7.2.7",
-        "CiscoAMP_7.3.9",
-        "CiscoAMP_7.3.15",
         "CSFalconService",
         "ir_agent",
         "SplunkForwarder"
@@ -36,7 +31,7 @@ Function Get-SecurityAgents{
     # Ignore any errors
     # Print out the result
     
-    $ServicesStatus = Get-Service -ComputerName $ComputerName -Name $Services -ErrorAction SilentlyContinue | Select Name,Status,StartType,DisplayName,MachineName
+    $ServicesStatus = Get-Service -ComputerName $ComputerName -Name $Services -ErrorAction SilentlyContinue | Select-Object Name,Status,StartType,DisplayName,MachineName
     $ServicesStatus | Format-Table
 
     # If need remediation
