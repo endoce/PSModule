@@ -3,6 +3,7 @@
 ## 2. CSFalconService - CrowdStrike
 ## 3. ir_agent - Rapid 7
 ## 4. SplunkForwarder - Splunk
+
 Function Get-SecurityAgents{
     
     ## Bingding Parameters
@@ -46,7 +47,7 @@ Function Get-SecurityAgents{
 
         # Get fixed services and print out
         Write-Warning "Getting services status after remediation..."
-        $ServicesStatus_Fixed = Get-Service -ComputerName $ComputerName -Name $Services -ErrorAction SilentlyContinue | Select Name,Status,StartType,DisplayName,MachineName
+        $ServicesStatus_Fixed = Get-Service -ComputerName $ComputerName -Name $Services -ErrorAction SilentlyContinue | Select-Object Name,Status,StartType,DisplayName,MachineName
         $ServicesStatus_Fixed | Format-Table
     }
 }
